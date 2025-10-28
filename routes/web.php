@@ -1,35 +1,26 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-    use Illuminate\Support\Facades\Route;
-    use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-//dashboard redirct
-    Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-        $user = Auth::user();
-        if ($user->role === '') {
-            return redirect()->route('');
-        } elseif ($user->role === 'user') {
-            return redirect()->route('siswa.dashboard');
-        }
-        return redirect('/');
-    })->name('dashboard');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\PengaduanController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::resource('admin', AdminController::class);
+    Route::patch('admin/{admin}/status', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
+});
 
-Route::middleware(['auth', 'role:user'])
+Route::middleware(['auth', 'role:user'])    
     ->prefix('user')
     ->name('user.')
     ->group(function () {

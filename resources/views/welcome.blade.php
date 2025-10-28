@@ -34,8 +34,9 @@
     <nav class="fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl mt-4 shadow-lg transition">
             <div class="flex items-center gap-2">
-                
-                <span class="font-semibold text-lg"></span>
+              <div class="flex items-center gap-2">
+                <img src="img/logo-smk.png" alt="Logo SMK" class="h-10 w-auto object-contain" />
+              </div>
             </div>
 
             <ul class="hidden md:flex gap-8 font-medium">
@@ -71,7 +72,7 @@
                     Bersama kita wujudkan lingkungan sekolah yang lebih baik.
                 </p>
                 <div class="flex gap-4 pt-4 justify-center md:justify-start">
-                    <a href="{{ url('dashboard') }}" class="bg-blue-500/30 backdrop-blur-md text-white border border-blue-300 px-6 py-3 rounded-full font-semibold hover:bg-blue-400/40 hover:border-white transition">
+                    <a href="{{ url('konselor.dashboard') }}" class="bg-blue-500/30 backdrop-blur-md text-white border border-blue-300 px-6 py-3 rounded-full font-semibold hover:bg-blue-400/40 hover:border-white transition">
                         Buat Laporan
                     </a>
                     <a href="#tentang" class="bg-transparent border border-white/30 px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition">
@@ -98,9 +99,9 @@
     <!-- Tentang -->
     <section id="tentang" class="py-24 bg-white text-gray-800 fade-up">
         <div class="max-w-5xl mx-auto text-center space-y-6 px-6">
-            <h2 class="text-3xl font-bold text-blue-900">Tentang Aplikasi</h2>
+            <h2 class="text-3xl font-bold text-blue-900">Tentang Website</h2>
             <p class="text-lg text-gray-700 leading-relaxed">
-                Aplikasi ini membantu siswa SMK Informatika Pesat untuk menyampaikan pengaduan atau laporan terkait kegiatan sekolah.
+                Website ini membantu siswa SMK Informatika Pesat untuk menyampaikan pengaduan atau laporan terkait kegiatan sekolah.
                 Semua laporan diterima dengan aman dan ditindaklanjuti oleh pihak sekolah demi kenyamanan bersama.
             </p>
         </div>
@@ -120,7 +121,7 @@
                     <p class="text-gray-300">Privasi laporan dijaga dengan sistem keamanan modern.</p>
                 </div>
                 <div class="p-6 bg-white/10 border border-white/10 backdrop-blur-md rounded-xl shadow-lg hover:scale-105 transition-transform duration-500">
-                    <h3 class="text-xl font-semibold text-blue-300 mb-2">Pantau Status</h3>
+                    <h3 class="text-xl font-semibold text-blue-300 mb-2">Perkembangan Status</h3>
                     <p class="text-gray-300">Lihat perkembangan laporanmu secara real-time melalui dashboard.</p>
                 </div>
             </div>
@@ -161,7 +162,6 @@
             }
         }, 50);
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -171,7 +171,6 @@
             });
         });
 
-        // Fade-in on scroll
         const faders = document.querySelectorAll('.fade-up');
         const appearOptions = { threshold: 0.2 };
         const appearOnScroll = new IntersectionObserver(function(entries, observer) {
