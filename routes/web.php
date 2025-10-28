@@ -23,7 +23,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('admin', AdminController::class);
 });
 
-Route::get('/User/create/{id}', [PengaduanController::class, 'create'])->name('Siswa.create');
-Route::post('/User/store', [PengaduanController::class, 'store'])->name('Siswa.store');
+Route::get('/siswa/pengaduan/create', [PengaduanController::class, 'create'])->name('siswa.pengaduan.create');
+Route::post('/siswa/pengaduan', [PengaduanController::class, 'store'])->name('siswa.pengaduan.store');
 
 require __DIR__.'/auth.php';
