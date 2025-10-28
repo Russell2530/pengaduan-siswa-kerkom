@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('tempat_kejadian');
             $table->string('gambar')->nullable();
+            $table->string('status')->default('Diproses');
             $table->timestamps();
         });
     }
