@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nama_pelapor');
             $table->string('terlapor');
             $table->text('deskripsi');
             $table->string('tempat_kejadian');
             $table->string('gambar');
+            $table->timestamps();
         });
     }
 

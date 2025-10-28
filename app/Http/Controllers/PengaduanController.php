@@ -9,7 +9,7 @@ class PengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduan = Pengaduan::all();
+        $pengaduan = Pengaduan::orderBy('created_at', 'desc')->get();
         return view('dashboard', compact('pengaduan'));
     }
 }

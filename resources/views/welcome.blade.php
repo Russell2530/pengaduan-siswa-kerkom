@@ -72,7 +72,7 @@
                     Bersama kita wujudkan lingkungan sekolah yang lebih baik.
                 </p>
                 <div class="flex gap-4 pt-4 justify-center md:justify-start">
-                    <a href="{{ url('konselor.dashboard') }}" class="bg-blue-500/30 backdrop-blur-md text-white border border-blue-300 px-6 py-3 rounded-full font-semibold hover:bg-blue-400/40 hover:border-white transition">
+                    <a href="{{ url('dashboard  ') }}" class="bg-blue-500/30 backdrop-blur-md text-white border border-blue-300 px-6 py-3 rounded-full font-semibold hover:bg-blue-400/40 hover:border-white transition">
                         Buat Laporan
                     </a>
                     <a href="#tentang" class="bg-transparent border border-white/30 px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition">
