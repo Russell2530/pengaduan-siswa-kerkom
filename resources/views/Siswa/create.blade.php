@@ -1,6 +1,6 @@
 
 <x-app-layout>
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 animate-fadeIn pt-[150px]">
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 animate-fadeIn">
         <div class="max-w-4xl mx-auto animate-fadeIn">
             <div class="text-center mb-10 animate-fadeIn">
                 <h1 class="text-4xl font-extrabold text-gray-800 mb-3 tracking-tight animate-fadeIn">Formulir Laporan Kejadian</h1>

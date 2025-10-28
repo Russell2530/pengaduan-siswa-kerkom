@@ -60,10 +60,10 @@ class AdminController extends Controller
     /**
      * Update the status of the specified resource.
      */
-    public function updateStatus(Request $request, Admin $admin)
+    public function updateStatus(Request $request, $pengaduanId)
     {
-        $admin = Pengaduan::find($admin->id);
-        $admin->update($request->all());
+        $pengaduan = Pengaduan::find($pengaduanId);
+        $pengaduan->update($request->only('status'));
         return redirect()->route('admin.index')->with('success', 'Status berhasil diperbarui');
     }
 
