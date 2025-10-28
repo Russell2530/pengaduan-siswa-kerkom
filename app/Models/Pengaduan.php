@@ -18,5 +18,6 @@ class Pengaduan extends Model
         'deskripsi',
         'tempat_kejadian',
         'gambar',
+        'status',
     ];
 }
