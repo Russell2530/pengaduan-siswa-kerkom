@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::all();
+        $admins = Pengaduan::all();
         return view('admin.index', compact('admins'));
     }
 
@@ -29,7 +30,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -61,13 +62,9 @@ class AdminController extends Controller
      */
     public function updateStatus(Request $request, Admin $admin)
     {
-        $request->validate([
-            'status' => 'required|in:diproses,diterima,selesai',
-        ]);
-
-        $admin->update(['status' => $request->status]);
-
-        return response()->json(['success' => true]);
+        $admin = Pengaduan::find($admin->id);
+        $admin->update($request->all());
+        return redirect()->route('admin.index')->with('success', 'Status berhasil diperbarui');
     }
 
     /**

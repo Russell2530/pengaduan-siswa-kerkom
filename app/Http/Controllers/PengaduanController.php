@@ -9,7 +9,7 @@ class PengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduan = Pengaduan::all();
+         $pengaduan = Pengaduan::latest()->get();
         return view('dashboard', compact('pengaduan'));
     }
 }

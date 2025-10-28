@@ -15,9 +15,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','role:admin'])->group(function () {
+    Route::match(['patch', 'put'], 'admin/{admin}/status', [AdminController::class, 'updateStatus'])
+        ->name('admin.updateStatus');
+        
     Route::resource('admin', AdminController::class);
-    Route::patch('admin/{admin}/status', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
 });
 
 require __DIR__.'/auth.php';
