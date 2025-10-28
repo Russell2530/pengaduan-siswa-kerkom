@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware(['auth','role:admin'])->group(function () {
-    Route::match(['patch', 'put'], 'admin/{admin}/status', [AdminController::class, 'updateStatus'])
+    Route::match(['patch', 'put'], 'admin/{pengaduan}/status', [AdminController::class, 'updateStatus'])
         ->name('admin.updateStatus');
 
     Route::resource('admin', AdminController::class);
