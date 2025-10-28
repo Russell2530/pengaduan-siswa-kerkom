@@ -1,124 +1,75 @@
 
 <x-app-layout>
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 animate-fadeIn">
-        <div class="max-w-4xl mx-auto animate-fadeIn">
-            <div class="text-center mb-10 animate-fadeIn">
-                <h1 class="text-4xl font-extrabold text-gray-800 mb-3 tracking-tight animate-fadeIn">Formulir Laporan Kejadian</h1>
-                <p class="text-gray-600 max-w-md mx-auto animate-fadeIn">Laporkan kejadian yang terjadi untuk ditindaklanjuti</p>
+    <div class="min-h-screen bg-gradient-to-br from-[#0a1633] to-[#10224d] py-12 px-4 sm:px-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Formulir Laporan Kejadian</h1>
+                <p class="text-gray-300">Laporkan kejadian yang terjadi untuk ditindaklanjuti</p>
             </div>
-            
-            <div class="animate-fadeIn">
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 p-8">
-                    <form action="{{ route('siswa.pengaduan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        @csrf
-                        
-                        <!-- Nama Pelapor -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="nama_pelapor">Nama Pelapor</label>
-                            <input 
-                                type="text" 
-                                name="nama_pelapor" 
-                                id="nama_pelapor" 
-                                value="{{ Auth::user()->name ?? old('nama_pelapor') }}"
-                                class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200" 
-                                placeholder="Nama lengkap Anda"/>
-                            @error('nama_pelapor')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Terlapor -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="terlapor">Terlapor</label>
-                            <input 
-                                type="text" 
-                                name="terlapor" 
-                                id="terlapor" 
-                                value="{{ old('terlapor') }}"
-                                class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200" 
-                                placeholder="Nama terlapor"/>
-                            @error('terlapor')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Kejadian -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="kejadian">Kejadian</label>
-                            <input 
-                                type="text" 
-                                name="kejadian" 
-                                id="kejadian" 
-                                value="{{ old('kejadian') }}"
-                                class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200" 
-                                placeholder="Jenis kejadian"/>
-                            @error('kejadian')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Deskripsi -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="deskripsi">Deskripsi Kejadian</label>
-                            <textarea 
-                                name="deskripsi" 
-                                id="deskripsi" 
-                                rows="5" 
-                                class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200" 
-                                placeholder="Jelaskan secara detail kejadian yang terjadi">{{ old('deskripsi') }}</textarea>
-                            @error('deskripsi')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Tempat Kejadian -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="tempat_kejadian">Tempat Kejadian</label>
-                            <input 
-                                type="text" 
-                                name="tempat_kejadian" 
-                                id="tempat_kejadian" 
-                                value="{{ old('tempat_kejadian') }}"
-                                class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200" 
-                                placeholder="Lokasi kejadian terjadi"/>
-                            @error('tempat_kejadian')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Gambar Bukti -->
-                        <div>
-                            <label class="block mb-2 text-gray-700 font-semibold" for="gambar">Gambar Bukti (Opsional)</label>
-                            <div class="relative">
-                                <input 
-                                    type="file" 
-                                    name="gambar" 
-                                    id="gambar" 
-                                    accept="image/*"
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-200">
-                            </div>
-                            @error('gambar')
-                                <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        
-                        <!-- Status (Default to 'pending') -->
-                        <input type="hidden" name="status" value="pending">
-                        
-                        <!-- Tombol Submit -->
-                        <div class="pt-6">
-                            <button type="submit" 
-                                    class="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold text-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
-                                <span class="flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                    Kirim Laporan
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 p-8">
+                <form method="POST" action="{{ route('siswa.pengaduan.store') }}" enctype="multipart/form-data" class="space-y-6">
+                    @csrf
+
+                    <div>
+                        <label for="nama_pelapor" class="block text-sm font-semibold text-gray-700 mb-1">Nama Pelapor</label>
+                        <input type="text" id="nama_pelapor" name="nama_pelapor" value="{{ Auth::user()->name ?? old('nama_pelapor') }}" required class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="Nama lengkap Anda" />
+                        @error('nama_pelapor')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="terlapor" class="block text-sm font-semibold text-gray-700 mb-1">Terlapor</label>
+                        <input type="text" id="terlapor" name="terlapor" value="{{ old('terlapor') }}" required class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="Nama terlapor" />
+                        @error('terlapor')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="kejadian" class="block text-sm font-semibold text-gray-700 mb-1">Kejadian</label>
+                        <input type="text" id="kejadian" name="kejadian" value="{{ old('kejadian') }}" required class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="Jenis kejadian" />
+                        @error('kejadian')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="tempat_kejadian" class="block text-sm font-semibold text-gray-700 mb-1">Tempat Kejadian</label>
+                        <input type="text" id="tempat_kejadian" name="tempat_kejadian" value="{{ old('tempat_kejadian') }}" required class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="Lokasi kejadian terjadi" />
+                        @error('tempat_kejadian')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="gambar" class="block text-sm font-semibold text-gray-700 mb-1">Gambar Bukti (Opsional)</label>
+                        <input type="file" id="gambar" name="gambar" accept="image/*" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                        @error('gambar')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="deskripsi" class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi Kejadian</label>
+                        <textarea id="deskripsi" name="deskripsi" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="Jelaskan secara detail kejadian yang terjadi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <input type="hidden" name="status" value="Diproses">
+
+                    <div class="flex gap-4 pt-4">
+                        <button type="submit" class="flex-1 bg-[#0a1633] hover:bg-[#10224d] text-white font-semibold py-3 px-4 rounded-lg transition">
+                            Kirim Laporan
+                        </button>
+                        <a href="{{ route('dashboard') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded-lg text-center transition">
+                            Batal
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

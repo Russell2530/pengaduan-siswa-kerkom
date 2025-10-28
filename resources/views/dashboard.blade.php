@@ -10,8 +10,15 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-medium mb-4">Data Pengaduan</h3>
+                    <p class="mb-4 text-gray-700">
+                        Total Laporan Tercatat:
+                        <span class="font-semibold text-blue-600">
+                            {{ $pengaduan->count() }}
+                        </span>
+                    </p>
                     <div class="mb-4">
-                        <a href="{{ route('siswa.pengaduan.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
+                        <a href="{{ route('siswa.pengaduan.create') }}"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
                             Tambah Laporan
                         </a>
                     </div>
@@ -29,29 +36,30 @@
                         </thead>
                         <tbody>
                             @forelse($pengaduan as $item)
-                            <tr>
-                                <td class="px-4 py-2 border-b">{{ $item->nama_pelapor }}</td>
-                                <td class="px-4 py-2 border-b">{{ $item->terlapor }}</td>
-                                <td class="px-4 py-2 border-b">{{ $item->kejadian }}</td>
-                                <td class="px-4 py-2 border-b">{{ $item->deskripsi }}</td>
-                                <td class="px-4 py-2 border-b">{{ $item->tempat_kejadian }}</td>
-                                <td class="px-4 py-2 border-b">
-                                    @if($item->gambar)
-                                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar" class="w-12 h-12 object-cover">
-                                    @else
-                                        <span>Tidak ada gambar</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-2 border-b">{{ $item->status }}</td>
-                            </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b">{{ $item->nama_pelapor }}</td>
+                                    <td class="px-4 py-2 border-b">{{ $item->terlapor }}</td>
+                                    <td class="px-4 py-2 border-b">{{ $item->kejadian }}</td>
+                                    <td class="px-4 py-2 border-b">{{ $item->deskripsi }}</td>
+                                    <td class="px-4 py-2 border-b">{{ $item->tempat_kejadian }}</td>
+                                    <td class="px-4 py-2 border-b">
+                                        @if($item->gambar)
+                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar"
+                                                class="w-12 h-12 object-cover">
+                                        @else
+                                            <span>Tidak ada gambar</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-2 border-b">{{ $item->status }}</td>
+                                </tr>
                             @empty
-                            <tr>
-                                <td colspan="6" class="px-4 py-2 border-b text-center">Tidak ada data tersedia</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="6" class="px-4 py-2 border-b text-center">Tidak ada data tersedia</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
