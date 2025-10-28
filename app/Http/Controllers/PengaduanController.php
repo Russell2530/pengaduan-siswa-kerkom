@@ -10,7 +10,7 @@ class PengaduanController extends Controller
 {
     public function index()
     {
-         $pengaduan = Pengaduan::latest()->get();
+        $pengaduan = Pengaduan::orderBy('created_at', 'desc')->get();
         return view('dashboard', compact('pengaduan'));
     }
 
@@ -46,4 +46,6 @@ class PengaduanController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Laporan kejadian berhasil dikirim!');
     }
+
+    
 }

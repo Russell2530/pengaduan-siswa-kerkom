@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaduanController;
+use App\Models\Pengaduan;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,5 +26,10 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 Route::get('/siswa/pengaduan/create', [PengaduanController::class, 'create'])->name('siswa.pengaduan.create');
 Route::post('/siswa/pengaduan', [PengaduanController::class, 'store'])->name('siswa.pengaduan.store');
+
+Route::get('/', function () {
+    $jumlahPengaduan = Pengaduan::count(); 
+    return view('welcome', compact('jumlahPengaduan'));
+});
 
 require __DIR__.'/auth.php';
