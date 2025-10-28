@@ -9,18 +9,18 @@
                 },
                 body: JSON.stringify({ status: status })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Status berhasil diperbarui');
-                } else {
-                    alert('Gagal memperbarui status');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Status berhasil diperbarui');
+                    } else {
+                        alert('Gagal memperbarui status');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan');
+                });
         }
     </script>
     <div class="py-12">
@@ -31,36 +31,66 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pelapor</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Terlapor</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tempat Kejadian</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar</th>
-                            
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                               
-                             </tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    ID</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Nama Pelapor</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Terlapor</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Kejadian</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tempat Kejadian</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Gambar</th>
+
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status</th>
+
+                            </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($admins as $admin)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $admin->id }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->nama_pelapor }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->terlapor }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-500">{{ $admin->deskripsi }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->tempat_kejadian }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->gambar }}</td>
-                              
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <select name="status" onchange="updateStatus({{ $admin->id }}, this.value)" class="border border-gray-300 rounded px-2 py-1">
-                                        <option value="diproses" {{ $admin->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
-                                        <option value="diterima" {{ $admin->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
-                                        <option value="selesai" {{ $admin->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                                    </select>
-                                </td>
-                            
-                             </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $admin->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->nama_pelapor }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->terlapor }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $admin->kejadian }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $admin->tempat_kejadian }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->gambar }}</td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <form action="{{ route('admin.updateStatus', $admin->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <select name="status" class="border border-gray-300 rounded px-2 py-1">
+                                                <option value="diproses" {{ $admin->status == 'diproses' ? 'selected' : '' }}>
+                                                    Diproses</option>
+                                                <option value="diterima" {{ $admin->status == 'diterima' ? 'selected' : '' }}>
+                                                    Diterima</option>
+                                                <option value="selesai" {{ $admin->status == 'selesai' ? 'selected' : '' }}>
+                                                    Selesai</option>
+                                            </select>
+                                            <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">
+                                                Update
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
