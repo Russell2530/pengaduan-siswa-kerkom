@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PengaduanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,8 +19,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::match(['patch', 'put'], 'admin/{admin}/status', [AdminController::class, 'updateStatus'])
         ->name('admin.updateStatus');
-        
+
     Route::resource('admin', AdminController::class);
 });
+
+Route::get('/User/create/{id}', [PengaduanController::class, 'create'])->name('Siswa.create');
+Route::post('/User/store', [PengaduanController::class, 'store'])->name('Siswa.store');
 
 require __DIR__.'/auth.php';
