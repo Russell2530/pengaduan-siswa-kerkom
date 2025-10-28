@@ -45,15 +45,26 @@
                 <li><a href="#fitur" class="hover:text-blue-300 transition">Fitur</a></li>
                 <li><a href="#kontak" class="hover:text-blue-300 transition">Kontak</a></li>
             </ul>
+            @auth
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-300 font-medium button-hover">
+                    Logout
+                </button>
+            </form>
 
+            @else
             <div class="flex gap-3">
                 <a href="{{ route('login') }}" class="px-5 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition font-medium">
                     Login
                 </a>
+                @if (Route::has('register'))
                 <a href="{{ route('register') }}" class="px-5 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition font-medium">
                     Register
-                </a>
+                </a>                
+                @endif
             </div>
+            @endauth
         </div>
     </nav>
 
@@ -91,7 +102,7 @@
         <!-- Counter -->
         <div class="mt-20 text-center fade-up">
             <h3 class="text-xl font-medium text-blue-200">Jumlah Laporan Masuk</h3>
-            <h2 id="laporanCounter" class="text-5xl font-extrabold mt-3 text-blue-300">0</h2>
+            <h2 id="laporanCounter" class="text-5xl font-extrabold mt-3 text-blue-300">{{ $jumlahPengaduan }}</h2>
             <p class="text-gray-300">dan terus bertambah setiap hari!</p>
         </div>
     </section>
@@ -150,7 +161,6 @@
         // Counter animation
         let counter = document.getElementById('laporanCounter');
         let count = 0;
-        const target = 1342;
 
         const interval = setInterval(() => {
             if (count < target) {

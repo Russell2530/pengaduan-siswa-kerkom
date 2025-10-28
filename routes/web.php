@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaduanController;
+use App\Models\Pengaduan;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,13 +18,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware(['auth','role:admin'])->group(function () {
-    Route::match(['patch', 'put'], 'admin/{admin}/status', [AdminController::class, 'updateStatus'])
+    Route::match(['patch', 'put'], 'admin/{pengaduan}/status', [AdminController::class, 'updateStatus'])
         ->name('admin.updateStatus');
 
     Route::resource('admin', AdminController::class);
 });
 
-Route::get('/User/create/{id}', [PengaduanController::class, 'create'])->name('Siswa.create');
-Route::post('/User/store', [PengaduanController::class, 'store'])->name('Siswa.store');
+Route::get('/siswa/pengaduan/create', [PengaduanController::class, 'create'])->name('siswa.pengaduan.create');
+Route::post('/siswa/pengaduan', [PengaduanController::class, 'store'])->name('siswa.pengaduan.store');
+
+Route::get('/', function () {
+    $jumlahPengaduan = Pengaduan::count(); 
+    return view('welcome', compact('jumlahPengaduan'));
+});
 
 require __DIR__.'/auth.php';

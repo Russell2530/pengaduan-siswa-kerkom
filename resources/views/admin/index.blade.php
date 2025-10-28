@@ -68,7 +68,13 @@
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $admin->kejadian }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ $admin->tempat_kejadian }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $admin->gambar }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        @if($admin->gambar)
+                                            <img src="{{ asset('storage/' . $admin->gambar) }}" alt="Gambar Bukti" class="w-16 h-16 object-cover rounded border border-gray-200">
+                                        @else
+                                            <span class="text-gray-500 italic">Tidak ada gambar</span>
+                                        @endif
+                                    </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <form action="{{ route('admin.updateStatus', $admin->id) }}" method="POST">
@@ -85,9 +91,7 @@
                                             <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">
                                                 Update
                                             </button>
-
                                         </form>
-
                                     </td>
 
                                 </tr>
