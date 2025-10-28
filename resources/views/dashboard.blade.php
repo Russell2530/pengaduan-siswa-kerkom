@@ -24,6 +24,7 @@
                                 <th class="px-4 py-2 border-b text-left">Deskripsi</th>
                                 <th class="px-4 py-2 border-b text-left">Tempat Kejadian</th>
                                 <th class="px-4 py-2 border-b text-left">Gambar</th>
+                                <th class="px-4 py-2 border-b text-left">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,7 @@
                                         <span>Tidak ada gambar</span>
                                     @endif
                                 </td>
+                                <td class="px-4 py-2 border-b">{{ $item->status }}</td>
                             </tr>
                             @empty
                             <tr>
