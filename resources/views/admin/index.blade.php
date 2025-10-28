@@ -85,9 +85,7 @@
                                             <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">
                                                 Update
                                             </button>
-
                                         </form>
-
                                     </td>
 
                                 </tr>
